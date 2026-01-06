@@ -1,65 +1,46 @@
-// CONFIGURATION
-const SERVER_IP = "spadikam.fun"; // Your Java IP
-const API_URL = `https://api.mcsrvstat.us/2/${SERVER_IP}`;
-
-// DOM ELEMENTS
-const playerCountSpan = document.getElementById("player-count");
-const discordCountSpan = document.getElementById("discord-count"); // Placeholder logic
-
-// 1. FETCH PLAYER COUNT
-async function fetchServerStats() {
-    try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-
-        if (data.online) {
-            playerCountSpan.innerText = `${data.players.online} / ${data.players.max}`;
-        } else {
-            playerCountSpan.innerText = "Offline";
-            playerCountSpan.style.color = "red";
-        }
-    } catch (error) {
-        console.error("Error fetching stats:", error);
-        playerCountSpan.innerText = "Error";
-    }
-}
-
-// 2. FAKE DISCORD COUNT (Since real Discord API needs a backend usually)
-// If you want real count, you need WidgetBot or a specific API. 
-// For now, I'll simulate a random active number or set it static.
-function setDiscordCount() {
-    // This is a fake number for visuals. 
-    // To get real number, enable "Widget" in Discord Server Settings and use that JSON.
-    discordCountSpan.innerText = "100+"; 
-}
-
-// 3. COPY IP FUNCTION
-function copyIp() {
-    const ipText = document.getElementById("ip-text").innerText;
-    navigator.clipboard.writeText(ipText).then(() => {
-        alert("IP Copied to clipboard: " + ipText);
-    });
-}
-
-// 4. SCROLL ANIMATION (Fade In)
+// 1. FADE IN ANIMATION
 const observerOptions = {
-    threshold: 0.1
+    threshold: 0.1 // Trigger when 10% of the item is visible
 };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+            entry.target.classList.add('is-visible');
         }
     });
 }, observerOptions);
 
-document.querySelectorAll('.fade-in').forEach(el => {
-    observer.observe(el);
-});
+// Select all elements with the fade class
+const fadeElements = document.querySelectorAll('.fade-on-scroll');
+fadeElements.forEach((el) => observer.observe(el));
 
-// INITIALIZE
-window.onload = () => {
-    fetchServerStats();
-    setDiscordCount();
-};
+
+// 2. SERVER STATUS
+const SERVER_IP = "spadikam.fun";
+async function fetchStatus() {
+    const statusText = document.getElementById("player-count");
+    try {
+        const response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
+        const data = await response.json();
+        if (data.online) {
+            statusText.innerText = `${data.players.online} Players Online`;
+            statusText.style.color = "#4ade80"; // Green
+        } else {
+            statusText.innerText = "Offline";
+            statusText.style.color = "#ef4444"; // Red
+        }
+    } catch (e) {
+        statusText.innerText = "Server Offline";
+    }
+}
+fetchStatus();
+
+
+// 3. COPY IP
+function copyText(txt) {
+    navigator.clipboard.writeText(txt).then(() => {
+        alert("IP Copied: " + txt);
+    });
+}
+
