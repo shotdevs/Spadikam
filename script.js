@@ -1,5 +1,5 @@
 // CONFIGURATION
-const SERVER_IP = "play.spadikam.fun"; // Your Java IP
+const SERVER_IP = "spadikam.fun"; // Your Java IP
 const API_URL = `https://api.mcsrvstat.us/2/${SERVER_IP}`;
 
 // DOM ELEMENTS
