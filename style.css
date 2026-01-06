@@ -2,11 +2,11 @@
 * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
 :root {
-    --red: #ff0000; /* Spadikam Anarchy Red */
+    --red: #ff0000;
     --red-dark: #8a0000;
-    --red-glow: rgba(255, 0, 0, 0.5);
+    --red-glow: rgba(255, 0, 0, 0.6);
     --dark-bg: #050505;
-    --glass-bg: rgba(0, 0, 0, 0.85); /* Dark see-through black for cards */
+    --glass-bg: rgba(0, 0, 0, 0.85);
     --text-main: #ffffff;
     --text-muted: #b0b0b0;
 }
@@ -14,22 +14,23 @@
 body {
     background-color: var(--dark-bg);
     
-    /* --- THE FIX: REAL MINECRAFT BACKGROUND --- */
-    /* High Quality Minecraft Night Shader with visible blocks/water */
-    background-image: url('https://wallpapers.com/images/hd/minecraft-night-shader-reflection-water-3840x2160-c3227494.jpg');
-    
-    /* ALTERNATIVE OPTIONS (Uncomment one if you prefer): */
-    /* Option 2: Nether Theme (Red) */
-    /* background-image: url('https://wallpapers.com/images/hd/minecraft-nether-4k-s9a28i43657348.jpg'); */
-    
+    /* --- BACKGROUND FIX --- */
+    /* 1. First Backup: A Minecraft Night Sky Gradient (in case image fails) */
+    background: linear-gradient(to bottom, #0a0a1a, #1a1a2e);
+
+    /* 2. Main Image: Using a reliable external source */
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://c4.wallpaperflare.com/wallpaper/326/218/693/minecraft-shaders-video-games-wallpaper-preview.jpg');
+
+    /* 3. Settings for the background */
     background-size: cover;
     background-position: center center;
-    background-attachment: fixed; /* Parallax: Background stays still while scrolling */
+    background-attachment: fixed; /* Parallax Effect */
     background-repeat: no-repeat;
     
     color: var(--text-main);
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 /* --- NAVBAR --- */
@@ -51,6 +52,7 @@ body {
     font-family: 'Ruslan Display', cursive;
     font-size: 1.5rem;
     letter-spacing: 1px;
+    color: white;
 }
 
 .nav-links { display: flex; gap: 20px; }
@@ -89,20 +91,13 @@ body {
     padding: 0 20px;
 }
 
-.hero-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    /* Darken the image slightly so text is readable */
-    background: rgba(0, 0, 0, 0.6); 
-    z-index: -1;
-}
-
 .hero h1 {
     font-family: 'Ruslan Display', cursive;
     font-size: 3.5rem;
     text-shadow: 0 0 20px black;
     margin-bottom: 10px;
     line-height: 1.1;
+    color: white;
 }
 
 .text-red { color: var(--red); text-shadow: 0 0 15px var(--red-glow); }
@@ -156,6 +151,7 @@ body {
     font-size: 2.5rem;
     margin-bottom: 50px;
     text-shadow: 2px 2px 0px black;
+    color: white;
 }
 
 .card-grid {
@@ -200,7 +196,7 @@ body {
 .owner-image img { height: 200px; filter: drop-shadow(0 0 15px rgba(255,255,255,0.1)); transition: 0.3s; }
 .owner-image img:hover { transform: scale(1.1); }
 
-.owner-title { font-size: 1.8rem; margin-bottom: 10px; font-family: 'Ruslan Display', cursive; }
+.owner-title { font-size: 1.8rem; margin-bottom: 10px; font-family: 'Ruslan Display', cursive; color: white; }
 .badge { background: var(--red); font-size: 0.7rem; padding: 4px 10px; border-radius: 4px; color: white; vertical-align: middle; margin-left: 10px; font-family: sans-serif; }
 .social-links { margin-top: 20px; }
 .social-links a { color: white; margin-right: 20px; text-decoration: none; font-size: 1rem; }
@@ -214,6 +210,7 @@ body {
     text-align: center;
     box-shadow: 0 10px 30px rgba(88, 101, 242, 0.4);
     border: 1px solid #7289da;
+    color: white;
 }
 .text-blurple { color: #ebedff; }
 .discord-big-icon { font-size: 4rem; margin-bottom: 15px; color: white; }
@@ -285,4 +282,4 @@ footer {
     .owner-layout { flex-direction: column; text-align: center; padding: 30px; }
     .ip-card { flex-direction: column; gap: 15px; text-align: center; }
     .ip-info-left { margin-bottom: 10px; }
-}
+        }
