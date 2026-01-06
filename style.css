@@ -1,216 +1,228 @@
-/* --- RESET & VARIABLES --- */
+/* --- VARIABLES --- */
 :root {
-    --bg-dark: #0a0a0a;
-    --bg-card: #121212;
-    --red-accent: #ff2a2a; /* Bright Anarchy Red */
-    --red-glow: rgba(255, 42, 42, 0.4);
-    --text-main: #ffffff;
-    --text-gray: #a0a0a0;
-    --font-heading: 'Russo One', sans-serif;
-    --font-body: 'Montserrat', sans-serif;
+    --bg-color: #050505;
+    --card-bg: rgba(20, 20, 20, 0.8);
+    --accent: #d4af37; /* Gold/Bronze for Prestige */
+    --text-main: #eeeeee;
+    --text-muted: #888888;
+    
+    /* Fonts */
+    --font-mc: 'VT323', monospace; /* The Minecraft Pixel Font */
+    --font-body: 'Inter', sans-serif; /* Clean readable font */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
 body {
-    background-color: var(--bg-dark);
+    background-color: var(--bg-color);
     color: var(--text-main);
     font-family: var(--font-body);
     overflow-x: hidden;
 }
 
-/* --- UTILITIES --- */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.text-red { color: var(--red-accent); }
-.text-white { color: white; }
-.section { padding: 80px 0; }
+/* --- SMOKEY FOG ANIMATION --- */
+.fog-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    background: #000 url('https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png') repeat-x;
+    background-size: cover;
+    opacity: 0.3;
+}
 
 /* --- NAVBAR --- */
 .navbar {
+    padding: 20px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-    background: rgba(10, 10, 10, 0.9);
+    background: rgba(0,0,0,0.5);
     backdrop-filter: blur(10px);
     position: fixed;
     width: 100%;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 999;
+    border-bottom: 2px solid #222;
 }
 
-.logo { font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 1px; }
+.logo {
+    font-family: var(--font-mc);
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    color: white;
+    text-shadow: 2px 2px 0px #000;
+}
 
-.nav-links { list-style: none; display: flex; gap: 30px; align-items: center; }
-.nav-links a { text-decoration: none; color: var(--text-main); font-weight: 600; transition: 0.3s; }
-.nav-links a:hover { color: var(--red-accent); }
+.nav-links { display: flex; gap: 30px; list-style: none; }
+.nav-links a { color: #ccc; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+.nav-links a:hover { color: white; text-shadow: 0 0 10px white; }
 
 .nav-btn {
-    background: var(--red-accent);
-    padding: 8px 20px;
-    border-radius: 4px;
-    clip-path: polygon(10% 0, 100% 0, 100% 80%, 90% 100%, 0 100%, 0 20%); /* Cool sci-fi shape */
+    background: white; color: black !important;
+    padding: 8px 16px; font-family: var(--font-mc); font-size: 1.2rem !important;
+    border: 2px solid white;
 }
-.nav-btn:hover { color: white !important; filter: brightness(1.2); }
+.nav-btn:hover { background: black; color: white !important; }
 
-/* --- HERO SECTION --- */
+/* --- HERO --- */
 .hero {
     height: 100vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    text-align: center;
-    position: relative;
-    /* Put a cool Minecraft shader background image URL here */
-    background: url('https://wallpapers.com/images/hd/minecraft-pvp-background-1920-x-1080-877z5a4k2g1v4e8b.jpg') no-repeat center center/cover;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.6), #0a0a0a);
-}
-
-.hero-content { position: relative; z-index: 2; max-width: 800px; padding: 20px; }
-
-.main-title {
-    font-family: var(--font-heading);
-    font-size: 4.5rem;
-    text-transform: uppercase;
-    line-height: 1.1;
-    margin-bottom: 15px;
-    text-shadow: 0 0 20px rgba(0,0,0,0.8);
-}
-
-.sub-title { font-size: 1.2rem; color: #ccc; margin-bottom: 30px; letter-spacing: 2px; }
-
-/* Status Pill */
-.server-pill {
-    display: inline-flex;
     align-items: center;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10px 25px;
+    text-align: center;
+    /* Dark gradient over background image */
+    background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,1) 100%);
+    padding: 20px;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
     border-radius: 50px;
-    backdrop-filter: blur(5px);
-    margin-bottom: 30px;
-}
-
-.status-indicator { position: relative; width: 12px; height: 12px; margin-right: 15px; }
-.dot { width: 100%; height: 100%; background-color: #00ff41; border-radius: 50%; position: absolute; }
-.ping-ring {
-    position: absolute; top: -4px; left: -4px; width: 20px; height: 20px;
-    border: 2px solid #00ff41; border-radius: 50%;
-    animation: ping 1.5s infinite; opacity: 0;
-}
-
-@keyframes ping { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
-
-.hero-buttons { display: flex; gap: 20px; justify-content: center; }
-
-.btn {
-    padding: 15px 35px;
-    border: none;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    color: var(--accent);
     text-transform: uppercase;
-    text-decoration: none;
-    transition: 0.3s;
-    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
-.btn-primary { background: var(--red-accent); color: white; clip-path: polygon(10% 0, 100% 0, 100% 80%, 90% 100%, 0 100%, 0 20%); }
-.btn-primary:hover { box-shadow: 0 0 20px var(--red-glow); transform: translateY(-2px); }
+.minecraft-title {
+    font-family: var(--font-mc);
+    font-size: 6rem;
+    line-height: 1;
+    margin-bottom: 10px;
+    text-shadow: 4px 4px 0px #000;
+}
 
-.btn-outline { background: transparent; border: 2px solid white; color: white; }
-.btn-outline:hover { background: white; color: black; }
+.text-accent { color: var(--accent); }
 
+.sub-title { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; }
 
-/* --- CARDS SECTION --- */
-.section-heading { text-align: center; font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 50px; }
+/* Status Box */
+.server-status-box {
+    display: flex; align-items: center; gap: 15px;
+    background: #111; padding: 10px 20px; border: 1px solid #333;
+    margin-bottom: 40px;
+    font-family: var(--font-mc); font-size: 1.5rem;
+}
+
+.online-indicator {
+    width: 15px; height: 15px; background: #4caf50;
+    box-shadow: 0 0 10px #4caf50;
+}
+
+.hero-buttons { display: flex; gap: 20px; }
+.btn {
+    padding: 15px 40px;
+    font-family: var(--font-mc);
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.2s;
+    /* Minecraft Button Style */
+    box-shadow: inset -4px -4px 0px rgba(0,0,0,0.5), inset 4px 4px 0px rgba(255,255,255,0.2);
+}
+
+.btn-primary { background: var(--accent); color: black; }
+.btn-primary:hover { background: #b8962e; transform: translateY(2px); }
+
+.btn-secondary { background: #333; color: white; }
+.btn-secondary:hover { background: #444; transform: translateY(2px); }
+
+/* --- FEATURES --- */
+.section { padding: 100px 0; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+.section-heading {
+    text-align: center; font-family: var(--font-mc);
+    font-size: 3rem; margin-bottom: 60px;
+    border-bottom: 4px solid var(--accent);
+    display: inline-block;
+    padding-bottom: 10px;
+    position: relative; left: 50%; transform: translateX(-50%);
+}
+
 .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
 
 .feature-card {
-    background: var(--bg-card);
-    padding: 40px 25px;
-    border-top: 3px solid transparent;
+    background: var(--card-bg);
+    border: 2px solid #222;
+    padding: 30px;
     text-align: center;
     transition: 0.3s;
-    position: relative;
-    overflow: hidden;
 }
 
-.feature-card:hover {
-    border-top: 3px solid var(--red-accent);
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
+.feature-card:hover { border-color: var(--accent); background: #111; }
 
-.card-icon { font-size: 3rem; color: var(--red-accent); margin-bottom: 20px; }
-.feature-card h3 { font-family: var(--font-heading); margin-bottom: 10px; font-size: 1.4rem; }
-.feature-card p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; }
+.icon-box { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
+.feature-card h3 { font-family: var(--font-mc); font-size: 2rem; margin-bottom: 10px; }
+.feature-card p { color: var(--text-muted); font-size: 0.95rem; }
 
-/* --- SPLIT SECTION (DISCORD/STAFF) --- */
-.split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-.section-heading-left { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 30px; }
+/* --- JOIN SECTION --- */
+.ip-wrapper { text-align: center; }
 
-.owner-card, .discord-card {
-    background: var(--bg-card);
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.05);
-}
-
-.owner-card { display: flex; align-items: center; gap: 20px; }
-.owner-img { width: 80px; border-radius: 8px; border: 2px solid var(--red-accent); }
-.owner-info .role { color: var(--red-accent); font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; }
-.owner-info .desc { font-style: italic; color: var(--text-gray); font-size: 0.9rem; }
-
-.discord-card { text-align: center; }
-.discord-header { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; }
-.discord-stats { margin: 15px 0; color: #7289da; font-weight: bold; }
-.online-dot { height: 10px; width: 10px; background: #00ff41; border-radius: 50%; display: inline-block; margin-right: 5px; }
-.btn-discord { background: #5865F2; width: 100%; display: block; border-radius: 5px; text-align: center; color: white; margin: 0; }
-
-/* --- IP SECTION --- */
-.ip-container { display: flex; flex-direction: column; gap: 20px; align-items: center; }
-.ip-box {
-    background: #1a1a1a;
-    padding: 15px 30px;
-    border-radius: 8px;
-    display: flex;
+.minecraft-box {
+    background: #111;
+    border: 4px solid #333;
+    display: inline-flex;
     align-items: center;
-    gap: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.box-label {
+    position: absolute; top: -15px; left: 20px;
+    background: var(--accent); color: black;
+    font-family: var(--font-mc); padding: 0 10px; font-size: 1.2rem;
+}
+
+.ip-text {
+    font-family: var(--font-mc); font-size: 2.5rem;
+    color: white; padding: 0 30px;
+    letter-spacing: 2px;
+}
+
+.copy-btn {
+    background: #333; color: white; border: none;
+    font-family: var(--font-mc); font-size: 1.5rem;
+    padding: 10px 20px; cursor: pointer;
+}
+.copy-btn:hover { background: #555; }
+
+.bedrock-info { color: var(--text-muted); font-family: monospace; }
+
+/* --- DISCORD / SPLIT --- */
+.split-layout {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #111; padding: 50px; border-radius: 20px;
     border: 1px solid #333;
-    min-width: 350px;
-    justify-content: space-between;
 }
 
-.platform-tag {
-    font-size: 0.8rem; font-weight: bold; padding: 4px 8px; border-radius: 4px;
+.discord-blue { color: #5865F2; }
+.discord-btn {
+    display: inline-block; margin-top: 20px;
+    background: #5865F2; color: white; padding: 10px 25px;
+    text-decoration: none; font-weight: bold; border-radius: 5px;
 }
-.platform-tag.java { background: #e67e22; color: white; }
-.platform-tag.bedrock { background: #2ecc71; color: black; }
 
-.ip-text { font-family: monospace; font-size: 1.2rem; letter-spacing: 1px; color: var(--red-accent); }
-.bedrock-details { display: flex; flex-direction: column; font-family: monospace; font-size: 0.9rem; color: #888; text-align: right;}
+.skin-render { height: 200px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+.owner-promo { display: flex; align-items: center; gap: 20px; text-align: left; }
 
-.copy-mini { background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem; transition: 0.2s; }
-.copy-mini:hover { color: var(--red-accent); }
-
-footer { text-align: center; padding: 40px; border-top: 1px solid #222; margin-top: 50px; color: #555; }
-
-/* --- ANIMATIONS --- */
-.fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
+footer { text-align: center; padding: 40px; background: #000; border-top: 2px solid #222; font-family: var(--font-mc); font-size: 1.2rem; color: #666; }
 
 /* Mobile */
 @media (max-width: 768px) {
-    .main-title { font-size: 2.8rem; }
-    .split-layout { grid-template-columns: 1fr; }
-    .nav-links { display: none; } /* Hide nav on mobile for simplicity, or add burger menu later */
-    .ip-box { flex-direction: column; text-align: center; min-width: 100%; }
-    .navbar { justify-content: center; }
-    .navbar .logo { font-size: 1.2rem; }
-                   }
+    .minecraft-title { font-size: 3.5rem; }
+    .split-layout { flex-direction: column; text-align: center; gap: 40px; }
+    .owner-promo { flex-direction: column; }
+    .nav-links { display: none; }
+    .minecraft-box { flex-direction: column; width: 100%; }
+    .copy-btn { width: 100%; margin-top: 10px; }
+}
+
