@@ -244,3 +244,12 @@ body {
     .ip-card { flex-direction: column; gap: 15px; text-align: center; }
 }
 
+/* --- SUCCESS STATE (Green) --- */
+.copy-btn.copied-success {
+    background-color: #22c55e !important; /* Bright Green */
+    border-color: #22c55e !important;
+    color: black !important; /* Black text for contrast */
+    transform: scale(1.05); /* Slight pop effect */
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.6); /* Green Glow */
+}
+
