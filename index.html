@@ -6,104 +6,123 @@
     <title>SPADIKAM ANARCHY</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Ruslan+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <header class="hero">
-        <div class="hero-content fade-on-scroll">
-            <h1 class="main-title">SPADIKAM <span class="text-red">ANARCHY</span></h1>
-            <p class="subtitle">NO RULES. NO MERCY. PURE SURVIVAL.</p>
-            
-            <div class="online-status">
-                <span class="dot"></span>
-                <span id="player-count">Checking Server...</span>
-            </div>
+    <nav class="navbar">
+        <div class="nav-logo">SPADIKAM <span class="text-red">ANARCHY</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#discord">Discord</a>
+        </div>
+        <a href="#join" class="nav-btn">PLAY NOW</a>
+    </nav>
 
-            <div class="hero-btns">
-                <a href="#join" class="btn btn-red">Start Playing</a>
-                <a href="YOUR_DISCORD_LINK" class="btn btn-outline">Discord</a>
+    <header id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="glitch-text">NO RULES. <span class="text-red">JUST CHAOS.</span></h1>
+            <p class="hero-sub">The Ultimate Hardcore Experience.</p>
+            
+            <div class="server-status">
+                <span class="status-dot"></span>
+                <span id="player-count">Pinging Server...</span>
             </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <span>SCROLL DOWN</span>
+            <i class="fa-solid fa-angles-down"></i>
         </div>
     </header>
 
-    <section class="section-container">
-        <div class="content-card fade-on-scroll">
-            <h2 class="section-title">WHY PLAY HERE?</h2>
-            <div class="grid-features">
-                <div class="feature-item">
-                    <i class="fa-solid fa-server"></i>
-                    <h3>Low Latency</h3>
-                    <p>Hosted on premium Ryzen nodes for lag-free PvP.</p>
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">SERVER <span class="text-red">FEATURES</span></h2>
+            
+            <div class="card-grid">
+                <div class="glass-card fade-in">
+                    <div class="icon-box"><i class="fa-solid fa-skull-crossbones"></i></div>
+                    <h3>True Anarchy</h3>
+                    <p>Griefing, stealing, and PvP are fully allowed. Trust no one.</p>
                 </div>
-                <div class="feature-item">
-                    <i class="fa-solid fa-mobile-screen"></i>
+                <div class="glass-card fade-in">
+                    <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Lag Free</h3>
+                    <p>Powered by Ryzen 9 nodes in India for the lowest ping.</p>
+                </div>
+                <div class="glass-card fade-in">
+                    <div class="icon-box"><i class="fa-solid fa-mobile-screen-button"></i></div>
                     <h3>Crossplay</h3>
-                    <p>Java & Bedrock support. Play on PC or Mobile.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fa-solid fa-skull"></i>
-                    <h3>Hardcore</h3>
-                    <p>True anarchy. Griefing and stealing are allowed.</p>
+                    <p>Java & Bedrock support. Play on any device.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-container">
-        <div class="content-card fade-on-scroll">
-            <h2 class="section-title">THE FOUNDER</h2>
-            <div class="owner-layout">
-                <div class="owner-img-box">
-                    <img src="https://mc-heads.net/body/Rupty1/right" alt="Owner Skin">
+    <section class="section">
+        <div class="container">
+            <div class="glass-card owner-layout fade-in">
+                <div class="owner-image">
+                    <img src="https://mc-heads.net/body/Rupty1/right" alt="Rupty1">
                 </div>
-                <div class="owner-info">
-                    <h3 class="owner-name">Rupty1 <span class="tag">OWNER</span></h3>
-                    <p>Server owner, Website creator, Minecraft YouTuber, and Tech Enthusiast. Dedicated to keeping the server fair and running smoothly.</p>
-                    <div class="socials">
-                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="#"><i class="fa-brands fa-discord"></i></a>
+                <div class="owner-text">
+                    <h2 class="owner-title">THE <span class="text-red">FOUNDER</span></h2>
+                    <h3>Rupty1 <span class="badge">OWNER</span></h3>
+                    <p>Server owner, Website creator, and Tech Enthusiast. Building the most chaotic Minecraft experience for you.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
+                        <a href="#"><i class="fa-brands fa-github"></i> GitHub</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="join" class="section-container">
-        <div class="content-card fade-on-scroll">
-            <h2 class="section-title">SERVER IP</h2>
-            <div class="ip-wrapper">
-                
-                <div class="ip-row">
-                    <div class="ip-icon"><i class="fa-brands fa-java"></i></div>
-                    <div class="ip-details">
-                        <span class="label">JAVA IP</span>
-                        <span class="value">play.spadikam.fun</span>
-                    </div>
-                    <button class="copy-btn" onclick="copyText('play.spadikam.fun')">COPY</button>
+    <section id="discord" class="section">
+        <div class="container">
+            <div class="discord-banner fade-in">
+                <div class="discord-content">
+                    <i class="fa-brands fa-discord discord-big-icon"></i>
+                    <h2>JOIN THE <span class="text-blurple">COMMUNITY</span></h2>
+                    <p>Chat with other players, report hackers, or just hang out in VC.</p>
+                    <a href="YOUR_DISCORD_LINK" target="_blank" class="btn-discord">JOIN SERVER</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="join" class="section">
+        <div class="container">
+            <h2 class="section-title">SERVER <span class="text-red">IP</span></h2>
+            
+            <div class="ip-container fade-in">
+                <div class="ip-card">
+                    <div class="platform-label java">JAVA EDITION</div>
+                    <div class="ip-text">play.spadikam.fun</div>
+                    <button class="copy-btn" onclick="copyText('play.spadikam.fun')">COPY IP</button>
                 </div>
 
-                <div class="divider"></div>
-
-                <div class="ip-row">
-                    <div class="ip-icon"><i class="fa-solid fa-mobile"></i></div>
-                    <div class="ip-details">
-                        <span class="label">BEDROCK IP</span>
-                        <span class="value">pe.spadikam.fun</span>
-                        <span class="sub-value">Port: 19132</span>
+                <div class="ip-card">
+                    <div class="platform-label bedrock">BEDROCK EDITION</div>
+                    <div class="bedrock-info">
+                        <span>IP: <b class="text-white">pe.spadikam.fun</b></span>
+                        <span>Port: <b class="text-white">19132</b></span>
                     </div>
-                    <button class="copy-btn" onclick="copyText('pe.spadikam.fun')">COPY</button>
+                    <button class="copy-btn" onclick="copyText('pe.spadikam.fun')">COPY IP</button>
                 </div>
-
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 SPADIKAM ANARCHY</p>
+        <p>&copy; 2026 SPADIKAM ANARCHY. All Rights Reserved.</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
+
