@@ -1,175 +1,246 @@
-/* --- RESET & FONTS --- */
+/* --- RESET & VARIABLES --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-    --red: #e60000; /* Spadikam Red */
-    --dark: #0a0a0a;
-    --card-bg: rgba(18, 18, 18, 0.95); /* Dark card background */
-    --text: #ffffff;
-    --border: rgba(255, 255, 255, 0.1);
+    --red: #ff0000; /* Intense Red */
+    --red-glow: rgba(255, 0, 0, 0.5);
+    --dark-bg: #050505;
+    --glass-bg: rgba(10, 10, 10, 0.85);
+    --text-main: #ffffff;
+    --text-muted: #b0b0b0;
 }
 
 body {
-    background-color: var(--dark);
-    /* The main Minecraft Background Image */
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://wallpapers.com/images/hd/minecraft-shaders-desktop-4k-9y2p4o6j8h5j8k3l.jpg');
+    background-color: var(--dark-bg);
+    /* FIXED BACKGROUND IMAGE - High Quality Shader */
+    background-image: url('https://wallpapers.com/images/hd/minecraft-shader-4k-j8t9c6q5w3x2z1v4.jpg'); 
+    /* Fallback image if the above fails */
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.wallpapersden.com/image/download/minecraft-shaders-hd-4k_bGdmaWmUmZqaraWkpJRmbmdlrWZlbWU.jpg');
     background-size: cover;
-    background-attachment: fixed; /* Parallax effect */
     background-position: center;
-    color: var(--text);
+    background-attachment: fixed; /* This makes the parallax effect */
+    color: var(--text-main);
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
 }
 
-/* --- ANIMATION CLASSES --- */
-.fade-on-scroll {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.8s ease-out;
-}
-
-.fade-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* --- HERO --- */
-.hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.main-title {
-    font-size: 4rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-    line-height: 1;
-    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
-}
-
-.text-red { color: var(--red); }
-.subtitle { font-size: 1.2rem; opacity: 0.8; margin-top: 10px; font-weight: 300; }
-
-.hero-btns { margin-top: 30px; }
-.btn {
-    padding: 12px 30px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-    margin: 0 10px;
-    transition: 0.3s;
-    display: inline-block;
-}
-
-.btn-red { background: var(--red); color: white; box-shadow: 0 0 15px rgba(230, 0, 0, 0.4); }
-.btn-red:hover { transform: scale(1.05); background: #ff1a1a; }
-
-.btn-outline { border: 2px solid white; color: white; }
-.btn-outline:hover { background: white; color: black; }
-
-/* --- SECTION CARDS --- */
-.section-container {
-    padding: 80px 20px;
-    display: flex;
-    justify-content: center;
-}
-
-/* This is the "Section Card" style you wanted */
-.content-card {
-    background: var(--card-bg);
-    max-width: 900px;
+/* --- NAVBAR --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 50px;
-    border-radius: 15px;
-    border: 1px solid var(--border);
-    border-top: 4px solid var(--red); /* Red accent on top */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    backdrop-filter: blur(10px); /* Glass effect */
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
 }
 
-.section-title {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 40px;
-    color: var(--text);
-    text-transform: uppercase;
+.nav-logo {
+    font-family: 'Ruslan Display', cursive;
+    font-size: 1.5rem;
     letter-spacing: 1px;
 }
 
-/* --- FEATURES GRID --- */
-.grid-features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    text-align: center;
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
-.feature-item i { font-size: 2.5rem; color: var(--red); margin-bottom: 15px; }
-.feature-item h3 { font-size: 1.2rem; margin-bottom: 10px; }
-.feature-item p { font-size: 0.9rem; color: #ccc; }
+.nav-links a:hover { color: var(--red); }
 
-/* --- OWNER LAYOUT --- */
+.nav-btn {
+    background: var(--red);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 10px var(--red-glow);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-family: 'Ruslan Display', cursive;
+    font-size: 3.5rem;
+    text-shadow: 0 0 20px black;
+    margin-bottom: 10px;
+}
+
+.text-red { color: var(--red); text-shadow: 0 0 15px var(--red-glow); }
+
+.hero-sub {
+    font-size: 1.2rem;
+    color: #ddd;
+    background: rgba(0,0,0,0.6);
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.server-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 1px solid #333;
+}
+
+.status-dot {
+    height: 10px; width: 10px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+/* --- SECTIONS & CARDS --- */
+.section { padding: 80px 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+
+.section-title {
+    text-align: center;
+    font-family: 'Ruslan Display', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 0px black;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* THE NEW GLASS CARD STYLE */
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 3px solid var(--red); /* Red accent at bottom */
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--red);
+    box-shadow: 0 10px 40px var(--red-glow);
+}
+
+.icon-box {
+    font-size: 2.5rem;
+    color: var(--red);
+    margin-bottom: 20px;
+}
+
+/* --- OWNER SECTION --- */
 .owner-layout {
     display: flex;
     align-items: center;
     gap: 40px;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.owner-img-box img {
-    height: 200px; /* Shows the body of the skin */
-    filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+.owner-image img {
+    height: 180px;
+    filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
 }
 
-.owner-name { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; }
-.tag {
-    background: var(--red);
-    font-size: 0.7rem;
-    padding: 3px 8px;
-    border-radius: 4px;
-    vertical-align: middle;
-    margin-left: 10px;
-}
-.socials a { color: white; font-size: 1.5rem; margin-right: 15px; transition: 0.2s; }
-.socials a:hover { color: var(--red); }
+.owner-title { font-size: 1.5rem; margin-bottom: 5px; }
+.badge { background: var(--red); font-size: 0.8rem; padding: 2px 8px; border-radius: 4px; color: white; vertical-align: middle; }
+.social-links { margin-top: 15px; }
+.social-links a { color: white; margin-right: 15px; text-decoration: none; font-size: 0.9rem; }
+.social-links a:hover { color: var(--red); }
 
-/* --- JOIN / IP --- */
-.ip-wrapper { display: flex; flex-direction: column; gap: 20px; }
-.ip-row {
-    display: flex;
-    align-items: center;
-    background: rgba(255,255,255,0.05);
+/* --- DISCORD SECTION --- */
+.discord-banner {
+    background: linear-gradient(45deg, #404EED, #5865F2);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(88, 101, 242, 0.4);
+}
+
+.discord-content h2 { font-family: 'Ruslan Display', cursive; margin-bottom: 10px; font-size: 2rem; }
+.discord-big-icon { font-size: 3rem; margin-bottom: 15px; }
+.btn-discord {
+    display: inline-block;
+    background: white;
+    color: #5865F2;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: 0.2s;
+}
+.btn-discord:hover { transform: scale(1.05); }
+
+/* --- IP SECTION --- */
+.ip-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+.ip-card {
+    background: #111;
+    width: 100%;
+    max-width: 500px;
     padding: 20px;
     border-radius: 8px;
+    border: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.ip-icon { font-size: 2rem; margin-right: 20px; color: var(--red); }
-.ip-details { flex-grow: 1; }
-.ip-details .label { display: block; font-size: 0.8rem; color: #888; font-weight: bold; }
-.ip-details .value { display: block; font-size: 1.2rem; font-weight: 700; color: white; }
-.ip-details .sub-value { display: block; font-size: 0.9rem; color: #aaa; }
+
+.platform-label { font-size: 0.7rem; font-weight: bold; padding: 4px 8px; border-radius: 4px; margin-right: 15px; }
+.platform-label.java { background: #e67e22; color: black; }
+.platform-label.bedrock { background: #2ecc71; color: black; }
+
+.ip-text, .bedrock-info { font-family: monospace; font-size: 1.1rem; color: var(--red); }
+.bedrock-info span { display: block; font-size: 0.9rem; color: #888; }
+.text-white { color: white; }
 
 .copy-btn {
     background: transparent;
     border: 1px solid var(--red);
     color: var(--red);
-    padding: 8px 16px;
+    padding: 5px 15px;
     cursor: pointer;
     font-weight: bold;
-    border-radius: 4px;
     transition: 0.2s;
 }
 .copy-btn:hover { background: var(--red); color: white; }
 
-.online-status { margin-top: 20px; font-weight: 600; color: #4ade80; }
-
-/* Mobile */
+/* --- MOBILE FIXES --- */
 @media (max-width: 768px) {
-    .main-title { font-size: 2.5rem; }
-    .content-card { padding: 30px 20px; }
+    .nav-links { display: none; } /* Simplified mobile nav */
+    .hero h1 { font-size: 2.5rem; }
     .owner-layout { flex-direction: column; text-align: center; }
-    .ip-row { flex-direction: column; text-align: center; gap: 15px; }
-    .ip-icon { margin: 0; }
+    .ip-card { flex-direction: column; gap: 15px; text-align: center; }
 }
+
