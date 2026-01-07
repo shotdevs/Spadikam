@@ -102,6 +102,22 @@ body {
     transition: 0.3s;
 }
 
+.nav-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    margin-right: 15px;
+}
+
+.nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #9ca3af;
+}
+
 .nav-btn:hover {
     background: #cc0000;
     transform: scale(1.05);
@@ -167,6 +183,19 @@ body {
     background-color: #00ff00;
     border-radius: 50%;
     box-shadow: 0 0 10px #00ff00;
+}
+
+.server-version {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    color: #9ca3af;
+}
+
+.peak-players {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: #9ca3af;
 }
 
 .server-ping {
