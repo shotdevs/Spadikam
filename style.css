@@ -169,6 +169,11 @@ body {
     box-shadow: 0 0 10px #00ff00;
 }
 
+.server-ping {
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
