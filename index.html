@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- ================= NAVBAR ================= -->
 <nav class="navbar">
     <div class="nav-logo">
         <img src="images/logo.png" alt="Spadikam Logo" class="logo-img">
@@ -29,10 +29,16 @@
         <a href="#discord">Discord</a>
     </div>
 
+    <!-- NAVBAR LIVE STATUS -->
+    <div class="nav-status">
+        <span class="nav-dot"></span>
+        <span id="nav-status-text">Checking...</span>
+    </div>
+
     <a href="#join" class="nav-btn">PLAY NOW</a>
 </nav>
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 <header id="home" class="hero">
     <div class="hero-content fade-in">
         <img src="images/logo.png" alt="Spadikam Logo" class="hero-logo">
@@ -45,6 +51,10 @@
             <span id="player-count">Pinging Server...</span>
             <span id="server-ping" class="server-ping"></span>
         </div>
+
+        <div id="peak-players" class="peak-players">
+            Peak Today: --
+        </div>
     </div>
 
     <div class="scroll-indicator">
@@ -53,10 +63,14 @@
     </div>
 </header>
 
-<!-- FEATURES -->
+<!-- ================= FEATURES ================= -->
 <section id="features" class="section">
     <div class="container">
         <h2 class="section-title">SERVER <span class="text-red">FEATURES</span></h2>
+
+        <p class="server-version">
+            Supports Minecraft <b>1.16 → Latest</b>
+        </p>
 
         <div class="card-grid">
 
@@ -69,13 +83,13 @@
             <div class="glass-card fade-in">
                 <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
                 <h3>Lag Free</h3>
-                <p>High-performance hardware with stable 20 TPS.</p>
+                <p>Optimized hardware with stable 20 TPS.</p>
             </div>
 
             <div class="glass-card fade-in">
                 <div class="icon-box"><i class="fa-solid fa-clock"></i></div>
                 <h3>24/7 Online</h3>
-                <p>The world never sleeps. Your progress continues nonstop.</p>
+                <p>The world never sleeps. Progress continues nonstop.</p>
             </div>
 
             <div class="glass-card fade-in">
@@ -88,7 +102,7 @@
     </div>
 </section>
 
-<!-- DISCORD -->
+<!-- ================= DISCORD ================= -->
 <section id="discord" class="section">
     <div class="container">
         <div class="discord-banner fade-in">
@@ -100,7 +114,7 @@
     </div>
 </section>
 
-<!-- IP -->
+<!-- ================= SERVER IP ================= -->
 <section id="join" class="section">
     <div class="container">
         <h2 class="section-title">SERVER <span class="text-red">IP</span></h2>
@@ -132,6 +146,7 @@
     </div>
 </section>
 
+<!-- ================= FOOTER ================= -->
 <footer>
     <p>&copy; 2026 SPADIKAM ANARCHY. All Rights Reserved.</p>
 </footer>
