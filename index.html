@@ -12,7 +12,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- FIXED FAVICON PATH -->
     <link rel="icon" type="image/png" href="images/logo.png">
 </head>
 <body>
@@ -36,7 +35,6 @@
 <!-- HERO -->
 <header id="home" class="hero">
     <div class="hero-content fade-in">
-        <!-- FIXED HERO LOGO -->
         <img src="images/logo.png" alt="Spadikam Logo" class="hero-logo">
 
         <h1 class="glitch-text">NO RULES. <span class="text-red">JUST CHAOS.</span></h1>
@@ -44,7 +42,7 @@
 
         <div class="server-status">
             <span class="status-dot"></span>
-            <span id="player-count">25 Players Online</span>
+            <span id="player-count">Pinging Server...</span>
         </div>
     </div>
 
@@ -73,11 +71,10 @@
                 <p>High-performance hardware with stable 20 TPS.</p>
             </div>
 
-            <!-- ✅ NEW CARD -->
             <div class="glass-card fade-in">
                 <div class="icon-box"><i class="fa-solid fa-clock"></i></div>
                 <h3>24/7 Online</h3>
-                <p>The world never sleeps. Your bases, farms, and chaos continue nonstop.</p>
+                <p>The world never sleeps. Your progress continues nonstop.</p>
             </div>
 
             <div class="glass-card fade-in">
@@ -86,22 +83,6 @@
                 <p>Java & Bedrock players can play together seamlessly.</p>
             </div>
 
-        </div>
-    </div>
-</section>
-
-<!-- OWNER -->
-<section class="section">
-    <div class="container">
-        <div class="glass-card owner-layout fade-in">
-            <div class="owner-image">
-                <img src="https://mc-heads.net/body/Rupty1/right" alt="Owner Skin">
-            </div>
-            <div class="owner-text">
-                <h2 class="owner-title">THE <span class="text-red">FOUNDER</span></h2>
-                <h3>Damoo <span class="badge">OWNER</span></h3>
-                <p>Server owner, website creator, and tech enthusiast.</p>
-            </div>
         </div>
     </div>
 </section>
@@ -124,24 +105,28 @@
         <h2 class="section-title">SERVER <span class="text-red">IP</span></h2>
 
         <div class="ip-container fade-in">
+
+            <!-- JAVA -->
             <div class="ip-card">
-                <div>
-                    <div class="platform-label java">JAVA</div>
+                <div class="ip-info-left">
+                    <div class="platform-label java">JAVA EDITION</div>
                     <div class="ip-address">spadikam.fun</div>
                 </div>
-                <button class="copy-btn">COPY IP</button>
+                <button class="copy-btn" onclick="copyText('spadikam.fun', this)">COPY IP</button>
             </div>
 
+            <!-- BEDROCK -->
             <div class="ip-card">
-                <div>
-                    <div class="platform-label bedrock">BEDROCK</div>
+                <div class="ip-info-left">
+                    <div class="platform-label bedrock">BEDROCK EDITION</div>
                     <div class="bedrock-details">
                         <span>IP: <b class="text-white">spadikam.fun</b></span>
                         <span>Port: <b class="text-white">25257</b></span>
                     </div>
                 </div>
-                <button class="copy-btn">COPY IP</button>
+                <button class="copy-btn" onclick="copyText('spadikam.fun:25257', this)">COPY IP</button>
             </div>
+
         </div>
     </div>
 </section>
@@ -150,5 +135,6 @@
     <p>&copy; 2026 SPADIKAM ANARCHY. All Rights Reserved.</p>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
