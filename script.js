@@ -2,7 +2,7 @@
 const JAVA_IP = "play.spadikam.fun";
 const BEDROCK_IP = "spadikam.fun";
 const BEDROCK_PORT = "25257";
-const REFRESH_INTERVAL = 30000;
+const REFRESH_INTERVAL = 30000; // 30 seconds
 
 // ================= SERVER STATUS =================
 async function fetchStatus() {
@@ -10,20 +10,26 @@ async function fetchStatus() {
     const pingText = document.getElementById("server-ping");
     const statusDot = document.querySelector(".status-dot");
 
+    const navDot = document.querySelector(".nav-dot");
+    const navText = document.getElementById("nav-status-text");
+
+    const peakEl = document.getElementById("peak-players");
+    let peakToday = Number(localStorage.getItem("peakToday")) || 0;
+
     try {
         const [javaRes, bedrockRes] = await Promise.all([
             fetch(`https://api.mcsrvstat.us/2/${JAVA_IP}`).then(r => r.json()),
             fetch(`https://api.mcsrvstat.us/bedrock/2/${BEDROCK_IP}:${BEDROCK_PORT}`).then(r => r.json())
         ]);
 
-        const javaPlayers = javaRes.online ? javaRes.players.online || 0 : 0;
-        const bedrockPlayers = bedrockRes.online ? bedrockRes.players.online || 0 : 0;
+        const javaPlayers = javaRes.online ? (javaRes.players?.online || 0) : 0;
+        const bedrockPlayers = bedrockRes.online ? (bedrockRes.players?.online || 0) : 0;
         const totalPlayers = javaPlayers + bedrockPlayers;
 
         if (javaRes.online || bedrockRes.online) {
+            // ----- HERO STATUS -----
             statusText.textContent = `${totalPlayers} Players Online`;
 
-            // Ping (Java server ping only – reliable)
             if (javaRes.debug && javaRes.debug.ping) {
                 pingText.textContent = `• ${javaRes.debug.ping}ms`;
             } else {
@@ -33,21 +39,44 @@ async function fetchStatus() {
             statusText.style.color = "#4ade80";
             statusDot.style.backgroundColor = "#4ade80";
             statusDot.style.boxShadow = "0 0 10px #4ade80";
+
+            // ----- NAVBAR STATUS -----
+            navDot.style.backgroundColor = "#4ade80";
+            navText.textContent = "Online";
+
+            // ----- PEAK PLAYERS -----
+            if (totalPlayers > peakToday) {
+                peakToday = totalPlayers;
+                localStorage.setItem("peakToday", peakToday);
+            }
+            peakEl.textContent = `Peak Today: ${peakToday} Players`;
+
         } else {
+            // ----- OFFLINE STATE -----
             statusText.textContent = "Server Offline";
             pingText.textContent = "";
 
             statusText.style.color = "#ff4444";
             statusDot.style.backgroundColor = "#ff4444";
             statusDot.style.boxShadow = "0 0 10px #ff4444";
+
+            navDot.style.backgroundColor = "#ff4444";
+            navText.textContent = "Offline";
+
+            peakEl.textContent = `Peak Today: ${peakToday} Players`;
         }
-    } catch {
+
+    } catch (err) {
+        // ----- ERROR STATE -----
         statusText.textContent = "Server Offline";
         pingText.textContent = "";
 
         statusText.style.color = "#ff4444";
         statusDot.style.backgroundColor = "#ff4444";
         statusDot.style.boxShadow = "0 0 10px #ff4444";
+
+        navDot.style.backgroundColor = "#ff4444";
+        navText.textContent = "Offline";
     }
 }
 
@@ -67,10 +96,15 @@ function copyText(text, btn) {
             btn.style.borderColor = "var(--red)";
             btn.style.color = "var(--red)";
         }, 2000);
+    }).catch(() => {
+        btn.textContent = "FAILED";
+        btn.style.backgroundColor = "#ef4444";
+        btn.style.borderColor = "#ef4444";
+        btn.style.color = "#fff";
     });
 }
 
-// ================= FADE-IN =================
+// ================= FADE-IN ON SCROLL =================
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
