@@ -7,7 +7,6 @@ const REFRESH_INTERVAL = 30000; // 30 seconds
 // ================= SERVER STATUS =================
 async function fetchStatus() {
     const statusText = document.getElementById("player-count");
-    const pingText = document.getElementById("server-ping");
     const statusDot = document.querySelector(".status-dot");
 
     const navDot = document.querySelector(".nav-dot");
@@ -22,29 +21,27 @@ async function fetchStatus() {
             fetch(`https://api.mcsrvstat.us/bedrock/2/${BEDROCK_IP}:${BEDROCK_PORT}`).then(r => r.json())
         ]);
 
-        const javaPlayers = javaRes.online ? (javaRes.players?.online || 0) : 0;
-        const bedrockPlayers = bedrockRes.online ? (bedrockRes.players?.online || 0) : 0;
+        const javaOnline = javaRes.online === true;
+        const bedrockOnline = bedrockRes.online === true;
+
+        const javaPlayers = javaOnline ? (javaRes.players?.online || 0) : 0;
+        const bedrockPlayers = bedrockOnline ? (bedrockRes.players?.online || 0) : 0;
+
         const totalPlayers = javaPlayers + bedrockPlayers;
 
-        if (javaRes.online || bedrockRes.online) {
-            // ----- HERO STATUS -----
+        if (javaOnline || bedrockOnline) {
+            // HERO STATUS
             statusText.textContent = `${totalPlayers} Players Online`;
-
-            if (javaRes.debug && javaRes.debug.ping) {
-                pingText.textContent = `• ${javaRes.debug.ping}ms`;
-            } else {
-                pingText.textContent = "";
-            }
-
             statusText.style.color = "#4ade80";
+
             statusDot.style.backgroundColor = "#4ade80";
             statusDot.style.boxShadow = "0 0 10px #4ade80";
 
-            // ----- NAVBAR STATUS -----
+            // NAVBAR STATUS
             navDot.style.backgroundColor = "#4ade80";
             navText.textContent = "Online";
 
-            // ----- PEAK PLAYERS -----
+            // PEAK PLAYERS
             if (totalPlayers > peakToday) {
                 peakToday = totalPlayers;
                 localStorage.setItem("peakToday", peakToday);
@@ -52,11 +49,10 @@ async function fetchStatus() {
             peakEl.textContent = `Peak Today: ${peakToday} Players`;
 
         } else {
-            // ----- OFFLINE STATE -----
+            // OFFLINE STATE
             statusText.textContent = "Server Offline";
-            pingText.textContent = "";
-
             statusText.style.color = "#ff4444";
+
             statusDot.style.backgroundColor = "#ff4444";
             statusDot.style.boxShadow = "0 0 10px #ff4444";
 
@@ -67,11 +63,10 @@ async function fetchStatus() {
         }
 
     } catch (err) {
-        // ----- ERROR STATE -----
+        // HARD FAIL SAFE
         statusText.textContent = "Server Offline";
-        pingText.textContent = "";
-
         statusText.style.color = "#ff4444";
+
         statusDot.style.backgroundColor = "#ff4444";
         statusDot.style.boxShadow = "0 0 10px #ff4444";
 
@@ -96,11 +91,6 @@ function copyText(text, btn) {
             btn.style.borderColor = "var(--red)";
             btn.style.color = "var(--red)";
         }, 2000);
-    }).catch(() => {
-        btn.textContent = "FAILED";
-        btn.style.backgroundColor = "#ef4444";
-        btn.style.borderColor = "#ef4444";
-        btn.style.color = "#fff";
     });
 }
 
