@@ -307,6 +307,7 @@ body {
     color: var(--red);
     padding: 8px 20px;
     border-radius: 5px;
+    transition: all 0.25s ease;
     font-weight: bold;
     cursor: pointer;
 }
