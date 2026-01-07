@@ -13,16 +13,17 @@
 
 body {
     background-color: var(--dark-bg);
-    
-    /* --- YOUR GIF BACKGROUND --- */
-    /* 1. We put a dark tint on top (rgba 0.6) so text is easy to read */
-    /* 2. We link to your local file 'bg.gif' */
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('bg.gif');
 
-    /* Background Settings */
-    background-size: cover;       /* Ensures the GIF covers the whole screen */
-    background-position: center;  /* Centers the GIF */
-    background-attachment: fixed; /* Parallax effect: GIF stays still while you scroll */
+    /* --- BACKGROUND SETUP --- */
+    /* 1. We use the RAW link to your GitHub GIF to ensure it loads everywhere */
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://raw.githubusercontent.com/shotdevs/Spadikam/main/bg.gif');
+    
+    /* Fallback to local file if internet is slow */
+    /* background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('bg.gif'); */
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Keeps the GIF still while scrolling */
     background-repeat: no-repeat;
     
     color: var(--text-main);
@@ -281,4 +282,3 @@ footer {
     .ip-card { flex-direction: column; gap: 15px; text-align: center; }
     .ip-info-left { margin-bottom: 10px; }
 }
-
