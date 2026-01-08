@@ -55,9 +55,11 @@ body {
 }
 
 .logo-img {
-    height: 42px;
-    width: auto;
-    filter: drop-shadow(0 0 8px rgba(255,0,0,0.4));
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 12px rgba(255,0,0,0.45);
 }
 
 .logo-text {
@@ -90,18 +92,6 @@ body {
     color: var(--red);
 }
 
-.nav-btn {
-    background: var(--red);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9rem;
-    box-shadow: 0 0 10px var(--red-glow);
-    transition: 0.3s;
-}
-
 .nav-status {
     display: flex;
     align-items: center;
@@ -118,6 +108,18 @@ body {
     background: #9ca3af;
 }
 
+.nav-btn {
+    background: var(--red);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 0 10px var(--red-glow);
+    transition: 0.3s;
+}
+
 .nav-btn:hover {
     background: #cc0000;
     transform: scale(1.05);
@@ -127,7 +129,6 @@ body {
 .hero {
     height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -137,9 +138,12 @@ body {
 
 /* HERO LOGO */
 .hero-logo {
-    height: 120px;
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    object-fit: cover;
     margin-bottom: 25px;
-    filter: drop-shadow(0 0 25px var(--red-glow));
+    box-shadow: 0 0 30px var(--red-glow);
     animation: float 3s ease-in-out infinite;
 }
 
@@ -167,53 +171,15 @@ body {
     border: 1px solid rgba(255,255,255,0.1);
 }
 
+/* STATUS PILL */
 .server-status {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     background: rgba(0, 0, 0, 0.8);
     padding: 10px 25px;
-    border-radius: 50px;
+    border-radius: 999px;
     border: 1px solid #333;
-}
-
-.hero-ip {
-    margin-top: 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(0,0,0,0.7);
-    padding: 10px 18px;
-    border-radius: 30px;
-    border: 1px solid #333;
-}
-
-.hero-ip-text {
-    font-family: monospace;
-    font-size: 1rem;
-    color: #fff;
-}
-
-.hero-copy-btn {
-    background: transparent;
-    border: 2px solid var(--red);
-    color: var(--red);
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-
-.hero-copy-btn:hover {
-    background: var(--red);
-    color: #fff;
-}
-
-.hero-ip-note {
-    margin-top: 6px;
-    font-size: 0.8rem;
-    color: #9ca3af;
 }
 
 .status-dot {
@@ -224,10 +190,30 @@ body {
     box-shadow: 0 0 10px #00ff00;
 }
 
-.server-version {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 0.95rem;
+/* HERO IP PILL */
+.hero-ip-pill {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.8);
+    border: 1px solid #333;
+    font-family: monospace;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.hero-ip-pill:hover {
+    border-color: var(--red);
+    box-shadow: 0 0 12px var(--red-glow);
+}
+
+.hero-ip-note {
+    margin-top: 6px;
+    font-size: 0.8rem;
     color: #9ca3af;
 }
 
@@ -237,11 +223,7 @@ body {
     color: #9ca3af;
 }
 
-.server-ping {
-    color: #9ca3af;
-    font-size: 0.9rem;
-}
-
+/* --- SCROLL --- */
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
@@ -277,6 +259,13 @@ body {
     text-shadow: 2px 2px 0 black;
 }
 
+.server-version {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    color: #9ca3af;
+}
+
 /* --- CARDS --- */
 .card-grid {
     display: grid;
@@ -307,28 +296,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* --- OWNER --- */
-.owner-layout {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.owner-image img {
-    height: 200px;
-    filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
-}
-
-.badge {
-    background: var(--red);
-    font-size: 0.7rem;
-    padding: 4px 10px;
-    border-radius: 4px;
-    margin-left: 10px;
-}
-
 /* --- DISCORD --- */
 .discord-banner {
     background: linear-gradient(135deg, #404EED, #5865F2);
@@ -354,37 +321,6 @@ body {
     margin-top: 25px;
 }
 
-/* --- IP SECTION --- */
-.ip-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-}
-
-.ip-card {
-    background: #0f0f0f;
-    width: 100%;
-    max-width: 600px;
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid #333;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.copy-btn {
-    background: transparent;
-    border: 2px solid var(--red);
-    color: var(--red);
-    padding: 8px 20px;
-    border-radius: 5px;
-    transition: all 0.25s ease;
-    font-weight: bold;
-    cursor: pointer;
-}
-
 /* --- FOOTER --- */
 footer {
     text-align: center;
@@ -394,6 +330,7 @@ footer {
     font-size: 0.9rem;
     color: #555;
 }
+
 .footer-link {
     color: #ff0000;
     text-decoration: none;
@@ -408,13 +345,6 @@ footer {
 @media (max-width: 768px) {
     .nav-links { display: none; }
     .hero h1 { font-size: 2.5rem; }
-    .hero-logo { height: 90px; }
+    .hero-logo { height: 110px; width: 110px; }
     .logo-text { font-size: 1.2rem; }
-    .owner-layout { flex-direction: column; text-align: center; }
-    .ip-card { flex-direction: column; gap: 15px; }
-     .hero-ip {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-}
+                }
