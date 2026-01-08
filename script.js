@@ -111,6 +111,22 @@ document.querySelectorAll(".fade-in").forEach(el => {
     observer.observe(el);
 });
 
+// ========== Hero ip==============
+function copyHeroIP(el) {
+    const ip = "spadikam.fun";
+
+    navigator.clipboard.writeText(ip).then(() => {
+        const original = el.innerHTML;
+
+        el.innerHTML = "COPIED ✓";
+        el.style.color = "#4ade80";
+
+        setTimeout(() => {
+            el.innerHTML = original;
+            el.style.color = "#fff";
+        }, 1800);
+    });
+}
 // ================= INIT =================
 fetchStatus();
 setInterval(fetchStatus, REFRESH_INTERVAL);
