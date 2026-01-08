@@ -3,75 +3,126 @@ const JAVA_IP = "spadikam.fun";
 const BEDROCK_IP = "spadikam.fun";
 const BEDROCK_PORT = "25257";
 const REFRESH_INTERVAL = 30000; // 30 seconds
+const CACHE_DURATION = 15000; // 15 seconds cache
 
 // ================= SERVER STATUS =================
-async function fetchStatus() {
+let lastFetch = 0;
+let cachedData = null;
+
+async function fetchStatus(forceRefresh = false) {
     const statusText = document.getElementById("player-count");
     const statusDot = document.querySelector(".status-dot");
-
     const navDot = document.querySelector(".nav-dot");
     const navText = document.getElementById("nav-status-text");
-
     const peakEl = document.getElementById("peak-players");
-    let peakToday = Number(localStorage.getItem("peakToday")) || 0;
+    
+    const now = Date.now();
+    
+    // Use cached data if available and recent
+    if (!forceRefresh && cachedData && (now - lastFetch < CACHE_DURATION)) {
+        updateUI(cachedData);
+        return;
+    }
+
+    // Show loading state
+    statusText.textContent = "Updating...";
+    navText.textContent = "Checking...";
 
     try {
+        // Fetch both Java and Bedrock status with timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+
         const [javaRes, bedrockRes] = await Promise.all([
-            fetch(`https://api.mcsrvstat.us/2/${JAVA_IP}`).then(r => r.json()),
-            fetch(`https://api.mcsrvstat.us/bedrock/2/${BEDROCK_IP}:${BEDROCK_PORT}`).then(r => r.json())
+            fetch(`https://api.mcsrvstat.us/3/${JAVA_IP}`, { signal: controller.signal })
+                .then(r => r.json())
+                .catch(() => ({ online: false })),
+            fetch(`https://api.mcsrvstat.us/bedrock/3/${BEDROCK_IP}:${BEDROCK_PORT}`, { signal: controller.signal })
+                .then(r => r.json())
+                .catch(() => ({ online: false }))
         ]);
 
-        const javaOnline = javaRes.online === true;
-        const bedrockOnline = bedrockRes.online === true;
+        clearTimeout(timeoutId);
 
-        const javaPlayers = javaOnline ? (javaRes.players?.online || 0) : 0;
-        const bedrockPlayers = bedrockOnline ? (bedrockRes.players?.online || 0) : 0;
+        const data = {
+            javaOnline: javaRes.online === true,
+            bedrockOnline: bedrockRes.online === true,
+            javaPlayers: javaRes.online ? (javaRes.players?.online || 0) : 0,
+            bedrockPlayers: bedrockRes.online ? (bedrockRes.players?.online || 0) : 0,
+            timestamp: now
+        };
 
-        const totalPlayers = javaPlayers + bedrockPlayers;
-
-        if (javaOnline || bedrockOnline) {
-            // HERO STATUS
-            statusText.textContent = `${totalPlayers} Players Online`;
-            statusText.style.color = "#4ade80";
-
-            statusDot.style.backgroundColor = "#4ade80";
-            statusDot.style.boxShadow = "0 0 10px #4ade80";
-
-            // NAVBAR STATUS
-            navDot.style.backgroundColor = "#4ade80";
-            navText.textContent = "Online";
-
-            // PEAK PLAYERS
-            if (totalPlayers > peakToday) {
-                peakToday = totalPlayers;
-                localStorage.setItem("peakToday", peakToday);
-            }
-            peakEl.textContent = `Peak Today: ${peakToday} Players`;
-
-        } else {
-            // OFFLINE STATE
-            statusText.textContent = "Server Offline";
-            statusText.style.color = "#ff4444";
-
-            statusDot.style.backgroundColor = "#ff4444";
-            statusDot.style.boxShadow = "0 0 10px #ff4444";
-
-            navDot.style.backgroundColor = "#ff4444";
-            navText.textContent = "Offline";
-
-            peakEl.textContent = `Peak Today: ${peakToday} Players`;
-        }
+        cachedData = data;
+        lastFetch = now;
+        
+        updateUI(data);
 
     } catch (err) {
-        // HARD FAIL SAFE
+        console.error('Status fetch error:', err);
+        // Fallback to offline state
+        const fallbackData = {
+            javaOnline: false,
+            bedrockOnline: false,
+            javaPlayers: 0,
+            bedrockPlayers: 0,
+            timestamp: now
+        };
+        updateUI(fallbackData);
+    }
+}
+
+function updateUI(data) {
+    const statusText = document.getElementById("player-count");
+    const statusDot = document.querySelector(".status-dot");
+    const navDot = document.querySelector(".nav-dot");
+    const navText = document.getElementById("nav-status-text");
+    const peakEl = document.getElementById("peak-players");
+    
+    const totalPlayers = data.javaPlayers + data.bedrockPlayers;
+    const isOnline = data.javaOnline || data.bedrockOnline;
+
+    // Get today's date key for peak tracking
+    const today = new Date().toDateString();
+    const peakKey = `peak_${today}`;
+    let peakToday = Number(localStorage.getItem(peakKey)) || 0;
+
+    if (isOnline) {
+        // HERO STATUS
+        statusText.textContent = `${totalPlayers} Player${totalPlayers !== 1 ? 's' : ''} Online`;
+        statusText.style.color = "#4ade80";
+        
+        statusDot.style.backgroundColor = "#4ade80";
+        statusDot.style.boxShadow = "0 0 10px #4ade80";
+
+        // NAVBAR STATUS
+        navDot.style.backgroundColor = "#4ade80";
+        navDot.style.boxShadow = "0 0 10px #4ade80";
+        navText.textContent = `${totalPlayers} Online`;
+        navText.style.color = "#4ade80";
+
+        // PEAK PLAYERS
+        if (totalPlayers > peakToday) {
+            peakToday = totalPlayers;
+            localStorage.setItem(peakKey, peakToday);
+        }
+        peakEl.textContent = `Peak Today: ${peakToday} Player${peakToday !== 1 ? 's' : ''}`;
+        peakEl.style.color = "#fbbf24";
+
+    } else {
+        // OFFLINE STATE
         statusText.textContent = "Server Offline";
         statusText.style.color = "#ff4444";
-
+        
         statusDot.style.backgroundColor = "#ff4444";
         statusDot.style.boxShadow = "0 0 10px #ff4444";
 
         navDot.style.backgroundColor = "#ff4444";
+        navDot.style.boxShadow = "0 0 10px #ff4444";
         navText.textContent = "Offline";
+        navText.style.color = "#ff4444";
+
+        peakEl.textContent = `Peak Today: ${peakToday} Player${peakToday !== 1 ? 's' : ''}`;
+        peakEl.style.color = "#9ca3af";
     }
 }
 
@@ -90,6 +141,12 @@ function copyText(text, btn) {
             btn.style.backgroundColor = "transparent";
             btn.style.borderColor = "var(--red)";
             btn.style.color = "var(--red)";
+        }, 2000);
+    }).catch(err => {
+        console.error('Copy failed:', err);
+        btn.textContent = "FAILED";
+        setTimeout(() => {
+            btn.textContent = originalText;
         }, 2000);
     });
 }
@@ -111,7 +168,7 @@ document.querySelectorAll(".fade-in").forEach(el => {
     observer.observe(el);
 });
 
-// ========== Hero ip==============
+// ========== Hero IP ==============
 function copyHeroIP(el) {
     const ip = "spadikam.fun";
 
@@ -120,16 +177,19 @@ function copyHeroIP(el) {
 
         el.innerHTML = "COPIED ✓";
         el.style.color = "#4ade80";
+        el.style.borderColor = "#4ade80";
 
         setTimeout(() => {
             el.innerHTML = original;
             el.style.color = "#fff";
+            el.style.borderColor = "#333";
         }, 1800);
+    }).catch(err => {
+        console.error('Copy failed:', err);
     });
 }
 
-// ===== scroll
-
+// ===== Scroll Indicator =====
 const scrollIndicator = document.querySelector(".scroll-indicator");
 
 if (scrollIndicator) {
@@ -139,6 +199,23 @@ if (scrollIndicator) {
         }
     }, { once: true });
 }
+
+// ================= PAGE VISIBILITY =================
+// Update when page becomes visible
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        fetchStatus(true); // Force refresh when page becomes visible
+    }
+});
+
+// Update on page load
+window.addEventListener('load', () => {
+    fetchStatus(true); // Force fresh data on page load
+});
+
 // ================= INIT =================
-fetchStatus();
-setInterval(fetchStatus, REFRESH_INTERVAL);
+// Initial fetch on script load
+fetchStatus(true);
+
+// Regular interval updates
+setInterval(() => fetchStatus(false), REFRESH_INTERVAL);
