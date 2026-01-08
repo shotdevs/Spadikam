@@ -1,5 +1,5 @@
 // ================= CONFIG =================
-const JAVA_IP = "play.spadikam.fun";
+const JAVA_IP = "spadikam.fun";
 const BEDROCK_IP = "spadikam.fun";
 const BEDROCK_PORT = "25257";
 const REFRESH_INTERVAL = 30000; // 30 seconds
