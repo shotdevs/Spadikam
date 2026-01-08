@@ -127,6 +127,18 @@ function copyHeroIP(el) {
         }, 1800);
     });
 }
+
+// ===== scroll
+
+const scrollIndicator = document.querySelector(".scroll-indicator");
+
+if (scrollIndicator) {
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 20) {
+            scrollIndicator.classList.add("hidden");
+        }
+    }, { once: true });
+}
 // ================= INIT =================
 fetchStatus();
 setInterval(fetchStatus, REFRESH_INTERVAL);
