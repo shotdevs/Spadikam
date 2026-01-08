@@ -227,18 +227,27 @@ body {
 
 .scroll-indicator {
     position: absolute;
-    bottom: 26px;
+    bottom: 24px;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 6px;
     font-size: 0.75rem;
     letter-spacing: 1px;
     color: #9ca3af;
-    opacity: 0.7;
+    opacity: 0.65;
     animation: bounce 2s infinite;
     pointer-events: none;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        bottom: 24px;
+    }
+    40% {
+        bottom: 32px;
+    }
+    60% {
+        bottom: 28px;
+    }
 }
 
 /* ================= SECTIONS ================= */
