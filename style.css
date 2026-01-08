@@ -251,20 +251,22 @@ body {
     margin-bottom: 50px;
 }
 
-/* --- SERVER IP (OLD STYLE RESTORED) --- */
+
+
+/* --- IP SECTION --- */
 .ip-container {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
     align-items: center;
 }
 
 .ip-card {
-    background: rgba(0,0,0,0.85);
+    background: #0f0f0f;
     width: 100%;
     max-width: 600px;
-    padding: 22px 25px;
-    border-radius: 12px;
+    padding: 25px;
+    border-radius: 10px;
     border: 1px solid #333;
     display: flex;
     justify-content: space-between;
@@ -282,23 +284,25 @@ body {
     font-weight: 900;
     padding: 4px 8px;
     border-radius: 4px;
-    width: fit-content;
+    display: inline-block;
+    margin-bottom: 5px;
 }
 
 .platform-label.java {
     background: #e67e22;
-    color: #000;
+    color: black;
 }
 
 .platform-label.bedrock {
     background: #2ecc71;
-    color: #000;
+    color: black;
 }
 
 .ip-address,
 .bedrock-details {
     font-family: monospace;
     font-size: 1.3rem;
+    color: white;
     font-weight: bold;
 }
 
@@ -306,6 +310,7 @@ body {
     display: block;
     font-size: 1rem;
     color: #aaa;
+    margin-top: 2px;
 }
 
 .copy-btn {
@@ -313,14 +318,15 @@ body {
     border: 2px solid var(--red);
     color: var(--red);
     padding: 8px 20px;
-    border-radius: 6px;
-    font-weight: bold;
     cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.2s;
 }
 
 .copy-btn:hover {
     background: var(--red);
-    color: #fff;
+    color: white;
 }
 
 /* --- DISCORD --- */
@@ -353,14 +359,15 @@ footer {
     .hero h1 { font-size: 2.5rem; }
     .hero-logo { height: 110px; width: 110px; }
     .logo-text { font-size: 1.2rem; }
-
     .ip-card {
         flex-direction: column;
         gap: 15px;
         text-align: center;
     }
-
-    .copy-btn {
+    .ip-info-left {
+        margin-bottom: 10px;
+    }
+   .copy-btn {
         width: 100%;
     }
 }
