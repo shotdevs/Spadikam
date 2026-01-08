@@ -177,6 +177,45 @@ body {
     border: 1px solid #333;
 }
 
+.hero-ip {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0,0,0,0.7);
+    padding: 10px 18px;
+    border-radius: 30px;
+    border: 1px solid #333;
+}
+
+.hero-ip-text {
+    font-family: monospace;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.hero-copy-btn {
+    background: transparent;
+    border: 2px solid var(--red);
+    color: var(--red);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.hero-copy-btn:hover {
+    background: var(--red);
+    color: #fff;
+}
+
+.hero-ip-note {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
 .status-dot {
     height: 10px;
     width: 10px;
@@ -373,4 +412,9 @@ footer {
     .logo-text { font-size: 1.2rem; }
     .owner-layout { flex-direction: column; text-align: center; }
     .ip-card { flex-direction: column; gap: 15px; }
+     .hero-ip {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
 }
