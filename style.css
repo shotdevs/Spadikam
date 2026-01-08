@@ -1,4 +1,4 @@
-/* --- RESET & VARIABLES --- */
+/* ================= RESET & VARIABLES ================= */
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +16,7 @@
     --text-muted: #b0b0b0;
 }
 
-/* --- BODY --- */
+/* ================= BODY ================= */
 body {
     background-color: var(--dark-bg);
     background-image:
@@ -32,7 +32,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- NAVBAR --- */
+/* ================= NAVBAR ================= */
 .navbar {
     position: fixed;
     top: 0;
@@ -121,7 +121,7 @@ body {
     transform: scale(1.05);
 }
 
-/* --- HERO --- */
+/* ================= HERO ================= */
 .hero {
     height: 100vh;
     display: flex;
@@ -172,7 +172,7 @@ body {
     border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* --- STATUS PILL --- */
+/* ===== STATUS + HERO IP ===== */
 .server-status {
     display: inline-flex;
     align-items: center;
@@ -191,7 +191,6 @@ body {
     box-shadow: 0 0 10px #00ff00;
 }
 
-/* --- HERO IP PILL --- */
 .hero-ip-pill {
     margin-top: 14px;
     padding: 10px 22px;
@@ -219,7 +218,7 @@ body {
     color: #9ca3af;
 }
 
-/* --- SCROLL --- */
+/* ================= SCROLL ================= */
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
@@ -234,7 +233,7 @@ body {
     60% { transform: translateY(-5px); }
 }
 
-/* --- SECTIONS --- */
+/* ================= SECTIONS ================= */
 .section {
     padding: 80px 20px;
 }
@@ -251,9 +250,37 @@ body {
     margin-bottom: 50px;
 }
 
+/* ================= FEATURES CARDS ================= */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
 
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 3px solid var(--red);
+    padding: 40px 30px;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
 
-/* --- IP SECTION --- */
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 40px var(--red-glow);
+}
+
+.icon-box {
+    font-size: 3rem;
+    color: var(--red);
+    margin-bottom: 20px;
+}
+
+/* ================= SERVER IP (OLD STYLE) ================= */
 .ip-container {
     display: flex;
     flex-direction: column;
@@ -284,7 +311,6 @@ body {
     font-weight: 900;
     padding: 4px 8px;
     border-radius: 4px;
-    display: inline-block;
     margin-bottom: 5px;
 }
 
@@ -318,18 +344,17 @@ body {
     border: 2px solid var(--red);
     color: var(--red);
     padding: 8px 20px;
-    cursor: pointer;
     font-weight: bold;
     border-radius: 5px;
-    transition: 0.2s;
+    cursor: pointer;
 }
 
 .copy-btn:hover {
     background: var(--red);
-    color: white;
+    color: #fff;
 }
 
-/* --- DISCORD --- */
+/* ================= DISCORD ================= */
 .discord-banner {
     background: linear-gradient(135deg, #404EED, #5865F2);
     border-radius: 15px;
@@ -337,7 +362,7 @@ body {
     text-align: center;
 }
 
-/* --- FOOTER --- */
+/* ================= FOOTER ================= */
 footer {
     text-align: center;
     padding: 40px;
@@ -353,21 +378,24 @@ footer {
     text-decoration: none;
 }
 
-/* --- MOBILE --- */
+/* ================= MOBILE ================= */
 @media (max-width: 768px) {
     .nav-links { display: none; }
     .hero h1 { font-size: 2.5rem; }
     .hero-logo { height: 110px; width: 110px; }
     .logo-text { font-size: 1.2rem; }
+
     .ip-card {
         flex-direction: column;
         gap: 15px;
         text-align: center;
     }
+
     .ip-info-left {
         margin-bottom: 10px;
     }
-   .copy-btn {
+
+    .copy-btn {
         width: 100%;
     }
 }
