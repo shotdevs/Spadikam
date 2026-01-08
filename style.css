@@ -234,6 +234,13 @@ body {
 }
 
 /* ================= SECTIONS ================= */
+.server-version {
+    text-align: center;
+    margin-bottom: 50px; /* SPACE BEFORE CARDS */
+    font-size: 1rem;
+    color: #cfcfcf;
+}
+
 .section {
     padding: 80px 20px;
 }
@@ -255,6 +262,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
+    margin-top: 20px;
 }
 
 .glass-card {
@@ -362,6 +370,23 @@ body {
     text-align: center;
 }
 
+.btn-discord {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 40px;
+    background: #ffffff;
+    color: #5865F2;
+    font-weight: 800;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.btn-discord:hover {
+    background: #f1f1f1;
+    transform: scale(1.05);
+}
+
 /* ================= FOOTER ================= */
 footer {
     text-align: center;
@@ -399,3 +424,4 @@ footer {
         width: 100%;
     }
 }
+
