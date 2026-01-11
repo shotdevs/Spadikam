@@ -447,6 +447,12 @@ footer {
     color: #555;
 }
 
+.footer-link {
+    color: var(--red);
+    font-weight: 600;
+    text-decoration: none;
+}
+
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
     .nav-links { display: none; }
