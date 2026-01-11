@@ -136,6 +136,27 @@ body {
     position: relative;
 }
 
+/* ================= HERO LOGO FIX ================= */
+.hero-logo {
+    width: 130px !important;       /* Forces it to be small */
+    height: 130px !important;      /* Forces it to be square first */
+    border-radius: 50% !important; /* Cuts it into a perfect circle */
+    object-fit: cover;             /* Ensures the image fits inside */
+    margin-bottom: 20px;
+    border: 2px solid rgba(255, 0, 0, 0.2); /* Subtle red border */
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.4); /* Red Glow */
+    animation: float 3s ease-in-out infinite; /* Floating animation */
+}
+
+/* Floating Animation Keyframes */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+
+
 .hero-content {
     display: flex;
     flex-direction: column;
@@ -450,6 +471,11 @@ footer {
 
     .copy-btn {
         width: 100%;
+    }
+
+    .hero-logo {
+        width: 110px !important;
+        height: 110px !important;
     }
         }
         
